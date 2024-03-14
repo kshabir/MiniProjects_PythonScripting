@@ -1,0 +1,22 @@
+from pytube import YouTube
+from pytube import Playlist
+
+try:
+    #url = input("Enter the url: ")
+    #p= Playlist(url)
+
+    p = Playlist('https://www.youtube.com/watch?v=GaTXTx-wC_Y&list=PL9bw4S5ePsEEFQvMnJemJyI7cbRPF5C3p')
+
+    print("Title:", p.title)
+    print("Views:", p.views)
+
+    print(f'Downloading: {p.title}')
+    audio_file = f"{p.title}"
+    for video in p.videos:
+        yd = video.streams.filter(only_audio=True)
+        yd.first().download(output_path=audio_file, filename=video.title + '.mp3')
+        
+
+    print("Download completed!!")
+except Exception as e:
+    print("An error occurred:", str(e))
