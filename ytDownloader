@@ -1,0 +1,19 @@
+from pytube import YouTube
+
+try:
+    url = input("Enter the url: ")
+
+    yt = YouTube(url)
+
+    print("Title:", yt.title)
+    print("Views:", yt.views)
+
+    yd = yt.streams.filter(only_audio=True)
+    #stream=yt.streams.get_by_itag(22)
+    yd_audio = yd.first()
+
+    yd_audio.download(output_path='.', filename=yt.title + '.mp3')
+
+    print("Download completed!!")
+except Exception as e:
+    print("An error occurred:", str(e))
